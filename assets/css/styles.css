@@ -1,0 +1,206 @@
+/*----------------------- fonts ---------------------*/
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 700;
+    src: url(../fonts/eot/IRANSansWeb_Bold.eot);
+    src: url(../fonts/eot/IRANSansWeb_Bold.eot?#iefix) format("embedded-opentype"),
+    url(../fonts/woff2/IRANSansWeb_Bold.woff2) format("woff2"),
+    url(../fonts/woff/IRANSansWeb_Bold.woff) format("woff"),
+    url(../fonts/ttf/IRANSansWeb_Bold.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 500;
+    src: url(../fonts/eot/IRANSansWeb_Medium.eot);
+    src: url(../fonts/eot/IRANSansWeb_Medium.eot?#iefix) format("embedded-opentype"),
+    url(../fonts/woff2/IRANSansWeb_Medium.woff2) format("woff2"),
+    url(../fonts/woff/IRANSansWeb_Medium.woff) format("woff"),
+    url(../fonts/ttf/IRANSansWeb_Medium.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 300;
+    src: url(../fonts/eot/IRANSansWeb_Light.eot);
+    src: url(../fonts/eot/IRANSansWeb_Light.eot?#iefix) format("embedded-opentype"),
+    url(../fonts/woff2/IRANSansWeb_Light.woff2) format("woff2"),
+    url(../fonts/woff/IRANSansWeb_Light.woff) format("woff"),
+    url(../fonts/ttf/IRANSansWeb_Light.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 200;
+    src: url(../fonts/eot/IRANSansWeb_UltraLight.eot);
+    src: url(../fonts/eot/IRANSansWeb_UltraLight.eot?#iefix) format("embedded-opentype"),
+    url(../fonts/woff2/IRANSansWeb_UltraLight.woff2) format("woff2"),
+    url(../fonts/woff/IRANSansWeb_UltraLight.woff) format("woff"),
+    url(../fonts/ttf/IRANSansWeb_UltraLight.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/eot/IRANSansWeb.eot);
+    src: url(../fonts/eot/IRANSansWeb.eot?#iefix) format("embedded-opentype"),
+    url(../fonts/woff2/IRANSansWeb.woff2) format("woff2"),
+    url(../fonts/woff/IRANSansWeb.woff) format("woff"),
+    url(../fonts/ttf/IRANSansWeb.ttf) format("truetype")
+}
+
+/* end fonts*/
+
+html {
+    --HEIGHT: 1000px;
+    --WIDTH: 1000PX;
+    --SIDEBAR-WIDTH: 300PX;
+    --GAME-BOX-WIDTH: 700px;
+    --SIDEBAR-COLOR: black;
+    --GAME-BOX-COLOR: lightgrey;
+}
+
+body {
+    font-family: IRANSans;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.container-box {
+    width: 100vW;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-box {
+    width: var(--WIDTH);
+    height: var(--HEIGHT);
+    display: flex;
+}
+
+.sidebar {
+    width: var(--SIDEBAR-WIDTH);
+    height: 100%;
+    background-color: var(--SIDEBAR-COLOR);
+    display: flex;
+    flex-direction: column;
+
+}
+
+.game-box {
+    width: var(--WIDTH);
+    height: 100%;
+    border: #333 solid;
+    background-color: var(--GAME-BOX-COLOR);
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar .rect {
+    background-color: lightgray;
+    padding: 8px;
+}
+
+/* -------------------- bootstrap ----------------*/
+.btn {
+    font-weight: bold;
+}
+
+.modal-body {
+    direction: rtl;
+    text-align: center;
+}
+
+/* ------------------ fontawesome ----------- */
+.fa-heart {
+    color: red;
+}
+
+.fa-frown {
+    color: darkgrey;
+    font-size: x-large;
+}
+
+.fa-smile {
+    color: green;
+    font-size: x-large;
+}
+
+/* ----------------------- shapes  -------------------- */
+.shape {
+    position: absolute;
+}
+
+.square {
+    height: 100px;
+    width: 100px;
+    background-color: #555;
+}
+
+.circle {
+    height: 100px;
+    width: 100px;
+    background-color: #555;
+    border-radius: 50%;
+}
+
+.parallelogram {
+    width: 100px;
+    height: 50px;
+    transform: skew(20deg);
+    background: #555;
+}
+
+.rectangle {
+    height: 50px;
+    width: 100px;
+    background-color: #555;
+}
+
+.triangle-up {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid #555;
+}
+
+.triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 100px solid #555;
+}
+
+.triangle-left {
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-right: 100px solid #555;
+    border-bottom: 50px solid transparent;
+}
+
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-left: 100px solid #555;
+    border-bottom: 50px solid transparent;
+}
+
+.egg {
+    position: absolute;
+    display: block;
+    width: 80px;
+    height: 100px;
+    background-color: red;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
