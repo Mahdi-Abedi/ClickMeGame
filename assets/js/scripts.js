@@ -1,6 +1,37 @@
+/* ----------------- Translates --------------------- */
+const FA_VALUES = {
+    values: {
+        "btn.game.start": 'شروع بازی',
+        "btn.game.end": 'پایان بازی',
+        "btn.close": 'بستن',
+        "game.score": 'امتیاز:',
+        "game.end.message": 'بازی تمام شد',
+        "you.win.message": 'شما برنده شدید',
+        "you.lose.message": 'شما باختید',
+    }
+};
+
+const EN_VALUES = {
+    values: {
+        "btn.game.start": 'Start Game',
+        "btn.game.end": 'End Game',
+        "btn.close": 'Close',
+        "game.score": 'Score:',
+        "game.end.message": 'Game is end',
+        "you.win.message": 'You WIN',
+        "you.lose.message": 'You LOSE',
+
+    }
+};
+
+const Language = {
+    FA: {name: 'IR_FA', values: FA_VALUES},
+    EN: {name: 'US_EN', values: EN_VALUES},
+}
+let currentLang = Language.EN;
+//--------------------------------------------------
 const MAX_SHAPE_IN_GAME = 5;
 const START_LIVES_COUNT = 3;
-const ADD_SHAPE_TIME_DIFFERENCE = 600;
 const START_GAME_SPEED = 1000;
 
 let gameBox, gameBoxWidth, gameBoxHeight;
@@ -8,16 +39,16 @@ let sidebar;
 let scoreText;
 let livesText;
 let startGameBtn, endGameBtn;
-let interval;
+let mainInterval, shapeInterval;
 let score = 0;
 let lives = START_LIVES_COUNT;
 let shapeList = [];
-let addShapeTime = 0;
 let currentGameSpeed = START_GAME_SPEED;
+let translator;
 
 const Message = {
-    LOSE: {text: 'شما باختید', iconClass: 'fa-frown'},
-    END_GAME: {text: 'بازی تمام شد', iconClass: 'fa-smile'}
+    LOSE: {text: 'you.lose.message', iconClass: 'fa-frown'},
+    END_GAME: {text: 'game.end.message', iconClass: 'fa-smile'}
 };
 
 let shapeKeys;
@@ -57,6 +88,19 @@ function initGame() {
     addStartGameEvents();
 }
 
+function initLang() {
+    translator = i18n.create(currentLang.values);
+
+}
+
+function initTexts() {
+    startGameBtn.textContent = translator("btn.game.start");
+    endGameBtn.textContent = translator("btn.game.end");
+    $('#scoreModalLabel').text(translator('game.score'));
+    $('#modalTitle').text(translator('btn.game.end'));
+    $('.modal-footer > .btn').text(translator('btn.close'));
+}
+
 function init() {
     gameBox = document.getElementById('gameBox');
     gameBoxWidth = gameBox.clientWidth;
@@ -71,6 +115,8 @@ function init() {
 
     startGameBtn = document.getElementById('startGameBtn');
     endGameBtn = document.getElementById('endGameBtn');
+
+    $('#language').val(currentLang.name).trigger('change');
 }
 
 function addShape() {
@@ -118,23 +164,21 @@ function getRandomPosition(min, max) {
 }
 
 function timerStart() {
-    if (!interval) {
-        interval = setInterval(gameTick, 30)
+    if (!mainInterval) {
+        mainInterval = setInterval(gameTick, 30);
+        shapeCreatorStart();
     }
 }
 
 function timerStop() {
-    if (interval) {
-        clearInterval(interval);
-        interval = undefined;
+    if (mainInterval) {
+        clearInterval(mainInterval);
+        mainInterval = undefined;
+        shapeCreatorStop();
     }
 }
 
 function gameTick() {
-    if (shapeList.length < MAX_SHAPE_IN_GAME && (Date.now() - addShapeTime > ADD_SHAPE_TIME_DIFFERENCE)) {
-        addShapeTime = Date.now() - (Math.random() * ADD_SHAPE_TIME_DIFFERENCE);
-        addShape();
-    }
     for (let shape of shapeList) {
         shape.style.opacity = parseFloat(shape.style.opacity) + (currentGameSpeed / 30000);
         shape.style.top = parseInt(shape.style.top) + (currentGameSpeed / 500) + 'px';
@@ -142,6 +186,25 @@ function gameTick() {
             removeShape(shape);
             increaseLives();
         }
+    }
+}
+
+function shapeCreatorStart() {
+    if (!shapeInterval) {
+        shapeInterval = setInterval(createShapeTick, 1000)
+    }
+}
+
+function shapeCreatorStop() {
+    if (shapeInterval) {
+        clearInterval(shapeInterval);
+        shapeInterval = undefined;
+    }
+}
+
+function createShapeTick() {
+    if (shapeList.length < MAX_SHAPE_IN_GAME) {
+        addShape();
     }
 }
 
@@ -196,7 +259,7 @@ function setModalData(message) {
     i.attr('class', '');
     i.addClass('fas');
     i.addClass(message.iconClass);
-    $('#modalMessage').text(message.text);
+    $('#modalMessage').text(translator(message.text));
     $('#modalScore').text(score);
 }
 
@@ -237,4 +300,15 @@ function onStartBtnMouseDown(event) {
 
 function onEndBtnMouseDown(event) {
     endGame(Message.END_GAME);
+}
+
+function onLanguageChange(event) {
+    let chooseLangName = $('#language').val()
+    for (let lang in Language) {
+        if (Language[lang].name === chooseLangName) {
+            currentLang = Language[lang];
+            initLang();
+            initTexts();
+        }
+    }
 }

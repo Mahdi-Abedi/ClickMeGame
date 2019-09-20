@@ -16,14 +16,22 @@
 <div class="container-box">
     <div class="center-box">
         <div class="sidebar p-2" id="sidebar">
-            <div class="rect text-center">امتیاز: <span class="w-100" id="score">0</span></div>
+            <div class="rect text-center d-flex">
+                <i class="fas fa-star text-right"></i>
+                <span class="w-100" id="score">0</span>
+            </div>
             <div class="rect text-center mt-2 d-flex">
                 <i class="fas fa-heart text-right"></i>
                 <span class="w-100" id="lives">3</span>
             </div>
-            <div class="h-100 mt-2"></div>
-            <button class="btn btn-success mt-2" id="startGameBtn" type="button">شروع بازی</button>
-            <button class="btn btn-secondary disabled mt-2" id="endGameBtn" type="button">پایان بازی</button>
+            <div class="h-100 mt-2">
+                <select class="w-100 bro form-control" id="language" onchange="onLanguageChange(event)">
+                    <option value="IR_FA">فارسی</option>
+                    <option value="US_EN">English</option>
+                </select>
+            </div>
+            <button class="btn btn-success mt-2" id="startGameBtn" type="button"></button>
+            <button class="btn btn-secondary disabled mt-2" id="endGameBtn" type="button"></button>
         </div>
         <div class="game-box" id="gameBox"></div>
     </div>
@@ -34,15 +42,16 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle"><strong>پایان بازی</strong></h5>
+                <h5 class="modal-title" id="modalTitle"><strong>پایان بازی</strong></h5>
                 <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <i></i>
-                <strong id="modalMessage">باختید</strong><br/>
-                امتیاز شما:<span id="modalScore"></span>
+                <strong id="modalMessage"></strong><br/>
+                <span id="scoreModalLabel"></span>
+                <span id="modalScore"></span>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" data-dismiss="modal" type="button">بستن</button>
@@ -56,6 +65,7 @@
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/popper.js/dist/popper.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/roddeh-i18n/dist/i18n.js"></script>
 <script src="assets/js/scripts.js"></script>
 </body>
 </html>

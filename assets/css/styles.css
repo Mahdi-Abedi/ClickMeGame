@@ -133,6 +133,11 @@ body {
     font-size: x-large;
 }
 
+.fa-star {
+    color: yellow;
+    font-size: x-large;
+}
+
 /* ----------------------- shapes  -------------------- */
 .shape {
     position: absolute;
